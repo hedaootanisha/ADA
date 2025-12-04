@@ -1,0 +1,175 @@
+# **6) Implement Prim's Algorithm to Find the MST**
+
+## **Aim:**
+
+To implement Prim’s algorithm to compute the Minimum Spanning Tree (MST) of a connected weighted graph and output the MST edges along with their weights and total cost.
+
+## **Theory (Elongated):**
+
+A Minimum Spanning Tree (MST) of a connected, weighted, undirected graph is a subset of edges that connects all vertices with the minimum possible total weight and without forming cycles. Prim's algorithm is a **greedy strategy** that begins with a single vertex and expands the MST by repeatedly choosing the **smallest-weight edge** that connects a vertex already in the tree to a vertex outside it. This ensures that at each step, the intermediate tree remains optimal. The algorithm maintains three arrays: a `key[]` array storing the minimum weight edge to reach a vertex, a `parent[]` array recording the MST structure, and a boolean `mstSet[]` array marking included vertices. Prim's algorithm works efficiently for dense graphs using an adjacency matrix (O(V²)) and even faster on sparse graphs using a priority queue (O(E log V)). The MST is important in network design, circuit layout, clustering, and graph-based optimization problems.
+
+## **Algorithm (Easy):**
+
+1. Initialize all key values to infinity; mark all vertices as not included in MST.
+2. Set the starting vertex’s key to 0.
+3. Repeat until MST has all vertices:
+
+   * Pick the vertex with the smallest key value that is not yet in the MST.
+   * Include it in the MST.
+   * Update the key values of its adjacent vertices if a smaller connecting edge is found.
+4. The parent[] array now represents the MST edges.
+5. Print the MST edges and total cost.
+
+## **Conclusion:**
+
+Prim’s algorithm successfully builds an MST by always choosing the minimum-weight safe edge. It guarantees an optimal solution and is widely used in various optimization and network design problems.
+
+---
+
+
+
+
+
+
+
+
+
+
+# **7) Implement DFS on a Graph**
+
+## **Aim:**
+
+To perform Depth-First Search (DFS) on a graph represented by an adjacency list or matrix and display the traversal order from a given starting vertex.
+
+## **Theory (Elongated):**
+
+Depth-First Search (DFS) is a fundamental graph traversal technique that explores nodes **deeply before backtracking**, making it ideal for exploring structure and connectivity. DFS begins at a start vertex, marks it visited, and recursively moves to unvisited neighbours, forming a traversal path. This method mimics the behavior of a stack (either explicitly or via recursion). DFS is important in detecting cycles, identifying connected components, performing topological sorting, solving maze and puzzle problems, and even in compiler design (syntax checking). The time complexity varies based on graph representation: O(V + E) when using adjacency lists and O(V²) for adjacency matrices.
+
+## **Algorithm (Easy):**
+
+1. Mark all vertices as unvisited.
+2. Start DFS from the chosen vertex.
+3. Visit the current vertex and mark it as visited.
+4. For every adjacent vertex that is unvisited, recursively apply DFS.
+5. Print each vertex as it is visited.
+
+## **Conclusion:**
+
+DFS efficiently explores graphs by going as deep as possible along each branch, making it useful in many real-world and computational problems that involve exploration or connectivity detection.
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# **8) Solve TSP Using Dynamic Programming**
+
+## **Aim:**
+
+To solve the Travelling Salesman Problem (TSP) using Dynamic Programming and output the minimum cost of a tour that visits all cities once and returns to the start.
+
+## **Theory (Elongated):**
+
+The Travelling Salesman Problem is a classical NP-hard optimization problem requiring the shortest route that visits each city once and returns to the origin. The Dynamic Programming approach, specifically the **Held–Karp algorithm**, reduces TSP’s exponential complexity by exploiting overlapping subproblems. It uses a **bitmask DP table** where each state `dp[mask][i]` stores the minimum cost to reach city `i` after visiting the cities represented in `mask`. This approach systematically explores all travel subsets and chooses the optimal transitions. Although the algorithm still requires O(n²·2ⁿ) time, it is significantly faster than brute force (n!). DP-based TSP is practical for up to around 20 cities and illustrates how dynamic programming transforms problems with massive search spaces into solvable ones through intelligent state reuse.
+
+## **Algorithm (Easy):**
+
+1. Read the cost matrix for n cities.
+2. Initialize `dp[mask][i]` to infinity.
+3. Set base case `dp[1<<0][0] = 0` (start from city 0).
+4. For each mask and each city in the mask:
+
+   * Update DP states for cities not yet visited.
+5. After filling DP table, compute the final minimum tour cost by returning to start city.
+6. Print the minimum total cost.
+
+## **Conclusion:**
+
+Dynamic Programming provides an optimal and significantly more efficient solution to TSP than brute-force methods, allowing small-to-medium instances to be solved exactly.
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+# **9) Implement Merge Sort Using Divide & Conquer**
+
+## **Aim:**
+
+To implement the Merge Sort algorithm using Divide & Conquer and output the sorted list of elements.
+
+## **Theory (Elongated):**
+
+Merge Sort is a classic sorting algorithm built using the divide-and-conquer strategy. The array is recursively divided into two halves until individual elements remain. Then, during the conquer phase, the two halves are merged in sorted order. The merge operation ensures the final result is correctly ordered. Merge Sort guarantees **O(n log n)** performance in all cases—best, average, and worst—making it highly predictable and efficient for large datasets. It is also a **stable sort**, meaning equal elements preserve their input order. Though Merge Sort requires additional space for merging, it is widely used in applications like external sorting (e.g., sorting huge files) and parallel computing due to its deterministic performance.
+
+## **Algorithm (Easy):**
+
+1. If array has 1 or 0 elements, return (already sorted).
+2. Divide the array into two halves.
+3. Recursively apply Merge Sort to each half.
+4. Merge the two sorted halves into a temporary array.
+5. Copy merged elements back to the original array.
+6. Print the sorted array.
+
+## **Conclusion:**
+
+Merge Sort is an efficient, stable, divide-and-conquer sorting technique that ensures reliable performance and is well-suited for both theoretical study and practical implementation.
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# **10) Topological Ordering Using Warshall’s Algorithm**
+
+## **Aim:**
+
+To find a topological order of vertices in a Directed Acyclic Graph (DAG) using Warshall’s algorithm on the adjacency matrix.
+
+## **Theory (Elongated):**
+
+Topological sorting orders the vertices of a **DAG** so that every directed edge (u → v) places u before v in the ordering. Warshall’s algorithm computes the **transitive closure** of a graph—determining reachability between every pair of vertices. In a DAG, the transitive closure helps identify relative precedence: if a path exists from u to v, u must come earlier. After computing closure, we can assign each vertex a rank based on how many vertices reach it, which naturally produces a valid topological order. This method is computationally heavier (O(n³)) compared to DFS or Kahn’s algorithm, but it is conceptually simple and shows the power of closure-based reasoning. If the closure reveals any cycle (reach[i][i] = 1), topological sorting becomes impossible because cycles violate DAG properties.
+
+## **Algorithm (Easy):**
+
+1. Input the adjacency matrix.
+2. Apply Warshall’s algorithm to compute reachability.
+3. Check for cycles; if reach[i][i] = 1, stop (graph is not a DAG).
+4. Count how many vertices can reach each vertex.
+5. Arrange vertices in increasing order of this count.
+6. Output the resulting topological order.
+
+## **Conclusion:**
+
+Using Warshall’s algorithm for topological sorting utilizes reachability information for ordering vertices. This method highlights the relationship between DAG structure and transitive closure while producing a valid topological ordering.
